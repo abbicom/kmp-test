@@ -5,8 +5,10 @@ import Galleries from './galleries';
 import {hexToRGB, hexToHSL, Color, RGB, HSL} from '../helpers/color';
 
 
+// Props types
 interface PropTypes {};
 
+// State types
 interface StateTypes {
   colors: Color[];
   red_50: boolean;
@@ -15,6 +17,7 @@ interface StateTypes {
   saturation_50: boolean;
 };
 
+// Default colors
 const initColors: Color[] = [
   {hex: '#1ABC9C'},
   {hex: '#2ECC71'},
@@ -42,6 +45,7 @@ class App extends React.Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
 
+    // Initial state
     this.state = {
       colors: [],
       red_50: false,
@@ -63,6 +67,7 @@ class App extends React.Component<PropTypes, StateTypes> {
     if (colors) {
       this.setState({colors: JSON.parse(colors)});
     } else {
+      // set localStorage
       localStorage.setItem("colors", JSON.stringify(initColors));
       this.setState({colors: initColors});
     }
@@ -71,13 +76,16 @@ class App extends React.Component<PropTypes, StateTypes> {
   addColor(color: Color) {
     let {colors} = this.state;
     colors.push(color);
+    // set localStorage
     localStorage.setItem("colors", JSON.stringify(colors));
     this.setState({colors: colors});
   }
 
   removeColor(id: string) {
     let {colors} = this.state;
+    // filter removed color
     colors = colors.filter(color => color.id !== id);
+    // set localStorage
     localStorage.setItem("colors", JSON.stringify(colors));
     this.setState({colors: colors});
   }
@@ -101,28 +109,34 @@ class App extends React.Component<PropTypes, StateTypes> {
   render() {
     const {colors, red_50, green_50, blue_50, saturation_50} = this.state;
 
+    // Add RGB and HSL to color
     let _colors = colors.map((color: Color) => {
       const rgb: RGB = hexToRGB(color.hex);
       const hsl: HSL = hexToHSL(color.hex);
       return {...color, ...rgb, ...hsl};
     });
 
+    // filter red > 50%
     if (red_50) {
       _colors = _colors.filter(color => color.r > 127);
     }
 
+    // filter green > 50%
     if (green_50) {
       _colors = _colors.filter(color => color.g > 127);
     }
 
+    // filter blue > 50%
     if (blue_50) {
       _colors = _colors.filter(color => color.b > 127);
     }
 
+    // filter saturation > 50%
     if (saturation_50) {
       _colors = _colors.filter(color => color.s > 0.5);
     }
 
+    // sort colors (red > green > blue)
     _colors.sort((a, b) => {
       if (a.r > b.r) return -1;
       if (a.r < b.r) return 1;

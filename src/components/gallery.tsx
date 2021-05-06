@@ -2,6 +2,7 @@ import React from 'react';
 import {Color} from '../helpers/color';
 
 
+// Props types
 interface PropTypes {
     color: Color;
     removeColor(id: string): void;
@@ -13,7 +14,7 @@ const Gallery: React.FC<PropTypes> = (props) => {
             <div className="gallery-color" style={{backgroundColor: props.color.hex}}></div>
             <div className="gallery-hex">
                 {props.color.hex}
-                {props.color.id && <button type="button" className="gallery-remove" onClick={(e) => props.removeColor(props.color.id || '')}>X Remove</button>}
+                {props.color.id && <button type="button" className="gallery-remove" onClick={(e) => props.removeColor(props.color.id || '')}>X</button>}
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 
 
+// Props types
 interface PropTypes {
     red_50: boolean;
     setFilterRed(value: boolean): void;

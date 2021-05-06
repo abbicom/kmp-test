@@ -3,6 +3,7 @@ import {Color} from '../helpers/color';
 import {generateId} from '../helpers/string';
 
 
+// Props types
 interface Proptypes {
     addColor(color: Color): void;
 };
