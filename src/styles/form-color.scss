@@ -1,0 +1,22 @@
+.form-color {
+    padding: .5em;
+    border-bottom: 1px solid #333;
+    .form-label {
+        font-weight: bold;
+    }
+    .form-input {
+        padding: 5px;
+        margin-left: 10px;
+    }
+    .form-submit {
+        padding: 5px;
+        margin-left: 10px;
+    }
+    .form-preview {
+        padding: 3px 5px;
+        margin-left: 10px;
+        vertical-align: middle;
+        width: 50px;
+        display: inline-block;
+    }
+}
